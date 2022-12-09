@@ -287,6 +287,7 @@ class LoadImages:
             for _ in range(self.vid_stride):
                 self.cap.grab()
             ret_val, im0 = self.cap.retrieve()
+            im0 = cv2.rotate(im0, cv2.ROTATE_180)
             while not ret_val:
                 self.count += 1
                 self.cap.release()
@@ -295,6 +296,7 @@ class LoadImages:
                 path = self.files[self.count]
                 self._new_video(path)
                 ret_val, im0 = self.cap.read()
+                im0 = cv2.rotate(im0, cv2.ROTATE_180)
 
             self.frame += 1
             # im0 = self._cv2_rotate(im0)  # for use if cv2 autorotation is False
